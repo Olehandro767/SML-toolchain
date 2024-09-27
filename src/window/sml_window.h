@@ -1,10 +1,11 @@
 #ifndef SML_WINDOW_H
 #define SML_WINDOW_H
-#include "stdbool.h"
+#include "../utils/type/smp_string.h"
+#include <stdbool.h>
 
 typedef struct {
-  const char *title;
-  const char *iconPath;
+  const_string title;
+  const_string icon_path;
   int width;
   int height;
   int min_width;
@@ -16,15 +17,15 @@ typedef struct {
 
 sml_window_properties sml_init_window_properties(unsigned int width,
                                                  unsigned int height,
-                                                 char *title);
+                                                 const_string title);
 
 void *sml_create_simple_window(unsigned int width, unsigned int height,
-                               char *title);
+                               const_string title);
 
 void *sml_open_window(sml_window_properties properties);
 
-void *sml_just_open_window(char *title);
+void *sml_just_open_window(const_string title);
 
-void sml_close_window(void *sml_context);
+int sml_close_window(void *sml_context_ptr);
 
 #endif /* SML_WINDOW_H */

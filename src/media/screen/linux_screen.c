@@ -1,7 +1,7 @@
 #include "sml_screen.h"
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 sml_screen_resolution sml_get_screen_resilution() {
   char *array[8];

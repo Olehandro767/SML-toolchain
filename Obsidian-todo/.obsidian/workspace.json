@@ -18,6 +18,57 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "15047d4bd30bffef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Rendering Part.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "3d4a7fb10472d4dd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Rendering Part.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e31f5f79722af208",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "SML (Simple Media Lens).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      },
+      {
+        "id": "d73c6a5340ffaf93",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7fb8db706cf92939",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +136,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SML (Simple Media Lens).md",
+                "file": "Rendering Part.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +153,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SML (Simple Media Lens).md",
+                "file": "Rendering Part.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +176,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SML (Simple Media Lens).md"
+                "file": "Rendering Part.md"
               }
             }
           }
@@ -146,8 +197,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "62f98ce0b1120a5d",
+  "active": "3d4a7fb10472d4dd",
   "lastOpenFiles": [
-    "SML (Simple Media Lens).md"
+    "Build fundamentals.md",
+    "Rendering Part.md",
+    "SML (Simple Media Lens).md",
+    "Window Part.md"
   ]
 }

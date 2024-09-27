@@ -1,0 +1,5 @@
+libsdl2
+libsdl2-image
+libglew
+
+libx11
