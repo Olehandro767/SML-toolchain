@@ -1,16 +1,24 @@
+#include "../../utils/async/sml_async.h"
 #include "../sml_window.h"
 #include <GL/glx.h>
 #include <SDL2/SDL_image.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct {
   Window window;
   Display *display;
   GLXContext glcontext;
 } sml_X11_GL_window_context;
+
+typedef struct {
+  Window window;
+  Display *display;
+  XVisualInfo *visual_info;
+  sml_window_properties properties;
+} sml_X11_GL_window_async_data;
 
 void set_window_icon(Display *display, Window window, const_string icon_path) {
   if (IMG_Init(IMG_INIT_PNG) == 0) {
@@ -50,6 +58,26 @@ void set_window_icon(Display *display, Window window, const_string icon_path) {
   IMG_Quit();
 }
 
+void *prepare_GL_context(void *args) {
+  sml_X11_GL_window_async_data async_data =
+      (*(sml_X11_GL_window_async_data *)args);
+  GLXContext glcontext = glXCreateContext(
+      async_data.display, async_data.visual_info, NULL, GL_TRUE);
+  glXMakeCurrent(async_data.display, async_data.window, glcontext);
+
+  if (smp_string_is_not_empty(async_data.properties.icon_path)) {
+    set_window_icon(async_data.display, async_data.window,
+                    async_data.properties.icon_path);
+  }
+
+  void *context_ptr = malloc(sizeof(sml_X11_GL_window_context));
+  sml_X11_GL_window_context context =
+      *((sml_X11_GL_window_context *)context_ptr);
+  context.window = async_data.window;
+  context.display = async_data.display;
+  context.glcontext = glcontext;
+}
+
 void *sml_open_window(sml_window_properties properties) {
   Display *display = XOpenDisplay(NULL);
   if (display == NULL) {
@@ -79,20 +107,13 @@ void *sml_open_window(sml_window_properties properties) {
                                 CWColormap | CWEventMask, &window_attributes);
   XMapWindow(display, window);
   XStoreName(display, window, properties.title);
-  GLXContext glcontext = glXCreateContext(display, visual_info, NULL, GL_TRUE);
-  glXMakeCurrent(display, window, glcontext);
 
-  if (smp_string_is_not_empty(properties.icon_path)) {
-    set_window_icon(display, window, properties.icon_path);
-  }
-
-  void *context_ptr = malloc(sizeof(sml_X11_GL_window_context));
-  sml_X11_GL_window_context context =
-      *((sml_X11_GL_window_context *)context_ptr);
-  context.window = window;
-  context.display = display;
-  context.glcontext = glcontext;
-  return context_ptr;
+  sml_X11_GL_window_async_data async_data;
+  async_data.window = window;
+  async_data.display = display;
+  async_data.properties = properties;
+  async_data.visual_info = visual_info;
+  return sml_run_async(prepare_GL_context, &async_data);
 }
 
 int sml_close_window(void *sml_context_ptr) {

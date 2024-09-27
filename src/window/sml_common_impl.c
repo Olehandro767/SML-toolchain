@@ -27,5 +27,5 @@ void *sml_create_simple_window(unsigned int width, unsigned int height,
 
 void *sml_just_open_window(const_string title) {
   sml_screen_resolution resolution = sml_get_screen_resilution();
-  return sml_create_simple_window(resolution.width, resolution.height, title);
+  return sml_create_simple_window(resolution.width / 3, resolution.height / 3, title);
 }
