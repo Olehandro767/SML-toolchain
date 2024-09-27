@@ -2,8 +2,8 @@
 #define SML_MEDIA_SCREEN_H
 
 typedef struct {
-  int width;
-  int height;
+  unsigned int width;
+  unsigned int height;
 } sml_screen_resolution;
 
 sml_screen_resolution sml_get_screen_resilution();
