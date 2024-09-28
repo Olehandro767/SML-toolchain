@@ -113,7 +113,7 @@ void *sml_open_window(sml_window_properties properties) {
   async_data.display = display;
   async_data.properties = properties;
   async_data.visual_info = visual_info;
-  return sml_run_async(prepare_GL_context, &async_data);
+  return sml_run_async_and_await_data(prepare_GL_context, &async_data);
 }
 
 int sml_close_window(void *sml_context_ptr) {

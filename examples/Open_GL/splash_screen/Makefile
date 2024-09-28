@@ -7,7 +7,7 @@ all: main
 main: main.c
 	mkdir ./build
 	cp application_logo.png ./build/application_logo.png
-	$(CC) $(CFLAGS) -c -o ./build/sml_async_impl.o ../../../src/utils/async/linux_async.c
+	$(CC) $(CFLAGS) -c -o ./build/sml_async_impl.o ../../../src/utils/async/posix_thread_async.c
 	$(CC) $(CFLAGS) -c -o ./build/sml_screen_impl.o ../../../src/media/screen/linux_screen.c
 	$(CC) $(CFLAGS) -c -o ./build/sml_common_impl.o ../../../src/window/sml_common_impl.c $(LDFLAGS)
 	$(CC) $(CFLAGS) -c -o ./build/str_impl.o ../../../src/utils/type/string_impl.c
