@@ -21,11 +21,11 @@ void sml_await_operation(sml_operation_ptr ptr) {
 sml_operation_ptr sml_just_run_async(void (*rootine)(void *), void *args) {
   pthread_t thread_id;
   sml_operation_ptr pthread_ptr;
-  pthread_ptr.native_data_ptr = &thread_id;
   sml_async_void_context async_context;
   async_context.args = args;
   async_context.rootine = rootine;
   pthread_create(&thread_id, NULL, _just_run_async, args);
+  pthread_ptr.native_data_ptr = &thread_id;
 
   return pthread_ptr;
 }
